@@ -1,2 +1,2 @@
 # Arduino
-This is my repository of Arduino sketched
+This is my repository of Arduino sketches
