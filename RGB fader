@@ -1,0 +1,29 @@
+/*
+This is my first actual Arduino sketch. This is a simple RGB LED fader.
+*/
+byte red = 11;
+byte green = 10;
+byte blue = 9;
+byte redStates[]{1,0,0,1,0,1,1};
+byte greenStates[]{0,1,0,1,1,0,1};
+byte blueStates[]{0,0,1,0,1,1,1};
+int increasingVals[]{};
+int decreasingVals[]{};
+
+void setup() {
+    pinMode(red, OUTPUT);
+    pinMode(green, OUTPUT);
+    pinMode(blue, OUTPUT);
+    
+}
+
+void loop() {
+    
+}
+
+void fadeIn(int color){
+  
+  
+}
+
+void fadeOut
