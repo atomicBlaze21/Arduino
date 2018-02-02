@@ -7,23 +7,45 @@ byte blue = 9;
 byte redStates[]{1,0,0,1,0,1,1};
 byte greenStates[]{0,1,0,1,1,0,1};
 byte blueStates[]{0,0,1,0,1,1,1};
-int increasingVals[]{};
-int decreasingVals[]{};
 
 void setup() {
     pinMode(red, OUTPUT);
     pinMode(green, OUTPUT);
     pinMode(blue, OUTPUT);
-    
 }
 
 void loop() {
-    
+  for(int i=0; i<7; i++){                                          //iterates through the state arrays
+   updateLED(redStates[i], greenStates[i], blueStates[i]);
+   delay(3000); //stay on the color for 3 seconds before fading
+  }
 }
 
-void fadeIn(int color){
+void updateLED(int redState, int greenState, int blueState){
+  static int oldRedState;
+  static int oldGreenState;
+  static int oldBlueState;
   
-  
+  for(int p=1; p<=64; p++){ //This is the fade loop
+    if(redState != oldRedState && redState == 1){                  //This code sets the brightness of the LEDs for each fade state
+      analogWrite(red, p*4-1);
+    } else if(redState != oldRedState && redState == 0){
+      analogWrite(red, 255-(p*4-1));
+    }
+    if(greenState != oldGreenState && greenState == 1){
+      analogWrite(green, p*4-1);
+    } else if(greenState != oldGreenState && greenState == 0){
+      analogWrite(green, 255-(p*4-1));
+    }
+    if(blueState != oldBlueState && blueState == 1){
+      analogWrite(blue, p*4-1);
+    } else if(blueState != oldBlueState && blueState == 0){
+      analogWrite(blue, 255-(p*4-1));
+    }
+    delay(50); //create the illusion of fading
+  }
+  oldRedState = redState;
+  oldGreenState = greenState;
+  oldBlueState = blueState;
 }
-
-void fadeOut
+  
