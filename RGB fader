@@ -17,7 +17,7 @@ void setup() {
 void loop() {
   for(int i=0; i<7; i++){                                          //iterates through the state arrays
    updateLED(redStates[i], greenStates[i], blueStates[i]);
-   delay(3000); //stay on the color for 3 seconds before fading
+   delay(3000); //stay on the color for 3 seconds before fading to next color
   }
 }
 
@@ -26,26 +26,27 @@ void updateLED(int redState, int greenState, int blueState){
   static int oldGreenState;
   static int oldBlueState;
   
-  for(int p=1; p<=64; p++){ //This is the fade loop
+  for(int p=1; p<=256; p++){                                       //This is the fade loop
     if(redState != oldRedState && redState == 1){                  //This code sets the brightness of the LEDs for each fade state
-      analogWrite(red, p*4-1);
+      analogWrite(red, p-1);
     } else if(redState != oldRedState && redState == 0){
-      analogWrite(red, 255-(p*4-1));
+      analogWrite(red, 255-(p-1));
     }
     if(greenState != oldGreenState && greenState == 1){
-      analogWrite(green, p*4-1);
+      analogWrite(green, p-1);
     } else if(greenState != oldGreenState && greenState == 0){
-      analogWrite(green, 255-(p*4-1));
+      analogWrite(green, 255-(p-1));
     }
     if(blueState != oldBlueState && blueState == 1){
-      analogWrite(blue, p*4-1);
+      analogWrite(blue, p-1);
     } else if(blueState != oldBlueState && blueState == 0){
-      analogWrite(blue, 255-(p*4-1));
+      analogWrite(blue, 255-(p-1));
     }
-    delay(50); //create the illusion of fading
+    delay(15); //create the illusion of fading
   }
   oldRedState = redState;
   oldGreenState = greenState;
   oldBlueState = blueState;
 }
   
+
